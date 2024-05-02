@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/styles.css" rel="stylesheet">
+    </head>
+    <body>
+       <div class="container">
+        <div class="top">
+            <h1>Calculator</h1>
+            <button id="toggle">toggle</button>
+        </div>
+        <input id="screen" type="text" value="">
+        <div class="btn-hold">
+            <div class="btn-el">
+                <button onclick="handle(this)">1</button>
+                <button onclick="handle(this)">2</button>
+                <button onclick="handle(this)">3</button>
+                <button onclick="delet()" id="delet">Del</button>
+            </div>
+
+            <div class="btn-el">
+                <button onclick="handle(this)">4</button>
+                <button onclick="handle(this)">5</button>
+                <button onclick="handle(this)">6</button>
+                <button onclick="handle(this)">(</button>
+            </div>
+
+            <div class="btn-el">
+                <button onclick="handle(this)">7</button>
+                <button onclick="handle(this)">8</button>
+                <button onclick="handle(this)">9</button>
+                <button onclick="handle(this)">)</button>
+            </div>
+            <div class="btn-el">
+                <button id="add" onclick="handle(this)">+</button>
+                <button id="subtract" onclick="handle(this)">-</button>
+                <button id="divide" onclick="handle(this)">/</button>
+                <button id="multiply" onclick="handle(this)">*</button>
+            </div>
+
+        
+            <div class="btn-el">
+                <button onclick="reset()" class="reset">reset</button>
+                <button onclick="calculate()" class="equal">=</button>
+                
+            </div>
+
+        
+        </div>
+
+       </div>
+    
+       <script>
+            function handle(button) {
+                var value = button.innerText;
+                var screen = document.getElementById("screen");
+                screen.value = screen.value + value;
+
+
+            }
+
+            function calculate() {
+                var screen = document.getElementById("screen");
+                screen.value = eval(screen.value);
+            }
+            function reset() {
+                var screen = document.getElementById("screen");
+                screen.value = "";
+            }
+            function delet() {
+                var screen = document.getElementById("screen");
+                max_index = screen.value.length-1
+                screen.value = screen.value.slice(0,max_index)
+                
+            }
+
+            document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                calculate();
+            } else if (event.key === "Backspace") {
+                delet();
+            } else if (event.key === "Delete") {
+                reset();
+            } else {
+                var screen = document.getElementById("screen");
+                screen.value = screen.value + event.key;
+            }
+});
+
+
+
+            // function calculate() {
+            //     var screen = document.getElementById("screen");
+            //     var expression = screen.value;
+            //     var result = new Function('return ' + expression)();
+            //     screen.value = result;
+            // }
+       </script>
+    </body>
+</html>
